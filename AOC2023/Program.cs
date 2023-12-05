@@ -1,101 +1,143 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using AOC2023;
+
 //AOC2.Main();
 AOC3.Main();
 
 public class AOC3
 {
+    static char[,] schematic;
+    static Dictionary<string, int> numbers = new Dictionary<string, int>();
+
     public static void Main()
     {
         var input = File.ReadLines("input3.txt").ToList();
         var x = input.First().Length;
         var y = input.Count();
 
-        string[,] schematic = new string[x, y];
+        schematic = new char[x, y];
 
         for (var i = 0; i < input.Count(); i++)
         {
             var line = input[i];
             for (var j = 0; j < line.Length; j++)
             {
-                schematic[i, j] = line[j].ToString();
+                schematic[i, j] = line[j];
             }
         }
 
-        Dictionary<string, string> partNumbers = new Dictionary<string, string>();
+        for (var i = 0; i < schematic.GetLength(0); i++)
+        {
+            for (var j = 0; j < schematic.GetLength(1); j++)
+            {
+                ExtractNumbers(i, j);
+            }
+        }
 
+        foreach(var number in numbers.Values)
+        {
+            Console.WriteLine(number);
+        }
+        var sum = numbers.Values.Sum();
+        Console.Write(sum);
         Console.ReadLine();
     }
 
-    public static void ProcessPoint(int x, int y)
+    public static void ExtractNumbers(int x, int y)
     {
-        //process neighbours of point
-        //if number, get full number
-        //put any number in dictionary with xy as key
-    }
+        List<(int x, int y)> neighbours = new List<(int x, int y)>();
+        neighbours.Add((x - 1, y - 1));
+        neighbours.Add((x - 1, y));
+        neighbours.Add((x - 1, y + 1));
+        neighbours.Add((x, y + 1));
+        neighbours.Add((x + 1, y + 1));
+        neighbours.Add((x + 1, y));
+        neighbours.Add((x + 1, y - 1));
+        neighbours.Add((x, y - 1));
 
-    public static string GetFullNumber(int x, int y)
-    {
-        return "";
-    }
+        var indexValue = GetValueAtIndex(x, y);
 
-    public static bool IsNumber(string input)
-    {
-        return false;
-    }
-}
+        if ('.'.Equals(indexValue))
+            return;
+        else if (indexValue.HasValue && char.IsDigit(indexValue.Value))
+            return;
 
-public class AOC2
-{
-    public static void Main()
-    {
-        var input = File.ReadLines("input.txt");
-        Dictionary<string, int> dies = new Dictionary<string, int>();
-        dies.Add("blue", 14);
-        dies.Add("red", 12);
-        dies.Add("green", 13);
-
-        int idSum = 0;
-        int setPowerSum = 0;
-
-        foreach (var line in input)
+        foreach (var (neighbourX, neighbourY) in neighbours)
         {
-            var validGame = true;
-            var minDies = new Dictionary<string, int>();
+            //process neighbours of point
+            var neighbourValue = GetValueAtIndex(neighbourX, neighbourY);
 
-            var split = line.Split(":");
-            var id = int.Parse(split[0].Split(" ")[1]);
-            var split_2 = split[1];
-
-            var split_3 = split_2.Split(";");
-
-            foreach (var round in split_3)
+            if (neighbourValue.HasValue)
             {
-                var split_4 = round.Split(",");
-
-                foreach (var split_5 in split_4)
+                //if number, get full number
+                if (char.IsDigit(neighbourValue.Value))
                 {
-                    var color = split_5.Trim().Split(" ")[1];
-                    var amount = int.Parse(split_5.Trim().Split(" ")[0]);
-
-                    if (!minDies.ContainsKey(color))
-                        minDies[color] = amount;
-                    else if (minDies[color] < amount)
-                        minDies[color] = amount;
-
-                    if (dies[color] < amount)
-                        validGame = false;
+                    //put any number in dictionary with xy as key
+                    var fullNumberResult = GetFullNumber(neighbourX, neighbourY);
+                    var index = "" + fullNumberResult.Item1 + fullNumberResult.Item2;
+                    numbers[index] = int.Parse(fullNumberResult.Item3);
                 }
             }
-
-            int setPower = minDies["blue"] * minDies["red"] * minDies["green"];
-            setPowerSum += setPower;
-
-            if (validGame)
-                idSum += id;
         }
-        Console.WriteLine(idSum);
-        Console.WriteLine(setPowerSum);
-        Console.ReadLine();
+    }
+
+    public static char? GetValueAtIndex(int x, int y)
+    {
+        if (x < 0 || x >= schematic.GetLength(0) || y < 0 || y >= schematic.GetLength(1))
+            return null;
+
+        return schematic[x, y];
+    }
+
+    public static (int, int, string) GetFullNumber(int x, int y)
+    {
+        var fullNumber = schematic[x, y].ToString();
+
+        var leftY = y - 1;
+        var rightY = y + 1;
+
+        //go left
+        bool searchLeft = true;
+        while (searchLeft)
+        {
+            var leftValue = GetValueAtIndex(x, leftY);
+
+            if (leftValue.HasValue)
+            {
+                if (char.IsDigit(leftValue.Value))
+                {
+                    fullNumber = leftValue.Value.ToString() + fullNumber.ToString();
+                    leftY--;
+                }
+                else
+                    searchLeft = false;
+            }
+            else
+                searchLeft = false;
+
+        }
+
+        //go right
+        bool searchRight = true;
+        while (searchRight)
+        {
+            var rightValue = GetValueAtIndex(x, rightY);
+
+            if (rightValue.HasValue)
+            {
+                if (char.IsDigit(rightValue.Value))
+                {
+                    fullNumber = fullNumber.ToString() + rightValue.Value.ToString();
+                    rightY++;
+                }
+                else
+                    searchRight = false;
+            }
+            else
+                searchRight = false;
+        }
+
+        return (x, leftY, fullNumber);
     }
 }

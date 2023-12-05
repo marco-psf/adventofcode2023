@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\AOC2023.csproj": {}
+    "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\AOC2023.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\AOC2023.csproj": {
+    "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\AOC2023.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\AOC2023.csproj",
+        "projectUniqueName": "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\AOC2023.csproj",
         "projectName": "AOC2023",
-        "projectPath": "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\AOC2023.csproj",
-        "packagesPath": "C:\\Users\\Fraile\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\obj\\",
+        "projectPath": "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\AOC2023.csproj",
+        "packagesPath": "C:\\Users\\fraile\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Fraile\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fraile\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

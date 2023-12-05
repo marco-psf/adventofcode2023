@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QYJiyESwn38xAaYQ93iLklowQjnWpSgIAoXbErYQVUXJVBHRrUgmQ6sYAePjKK9fYVFZqFJC6GjfrqofT6twxA==",
+  "dgSpecHash": "kdrO2AEMZWDkERHPopcJhAENPVjz92o4DmRsJ5/+6Oa74w8CXCHUU34NOhxnvth1TqVCj7/7+3M7I9tlnTlc4w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Fraile\\source\\repos\\AOC2023\\AOC2023\\AOC2023.csproj",
+  "projectFilePath": "C:\\Users\\fraile\\source\\repos\\adventofcode2023\\AOC2023\\AOC2023.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
